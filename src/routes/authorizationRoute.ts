@@ -5,6 +5,7 @@ import basicAuthenticationMiddleware from "../middleware/basic-authentication.mi
 import ForbiddenError from "../models/forbidden.error.models";
 
 
+
 const authorizationRoute = Router();
 
 authorizationRoute.post('/token', basicAuthenticationMiddleware,async(req: Request, res: Response, next: NextFunction)=>{
@@ -16,7 +17,7 @@ authorizationRoute.post('/token', basicAuthenticationMiddleware,async(req: Reque
         }
         const jwtPlayload = {username: user.username};
         const jwtOptions: SignOptions = {subject: user?.uuid, expiresIn: '5m'};
-        const secretKey = "my_secret_key"
+        const secretKey = config.get<string>('jtw.secretkey')
         const jwt = JWT.sign(jwtPlayload, secretKey, jwtOptions)
 
         res.status(StatusCodes.OK).json({token: jwt})
