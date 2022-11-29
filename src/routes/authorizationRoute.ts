@@ -3,7 +3,7 @@ import { StatusCodes } from "http-status-codes";
 import JWT, { SignOptions } from "jsonwebtoken";
 import basicAuthenticationMiddleware from "../middleware/basic-authentication.middleware";
 import ForbiddenError from "../models/forbidden.error.models";
-
+import config from "config"
 
 
 const authorizationRoute = Router();
